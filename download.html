@@ -9,11 +9,11 @@
 
     <!-- mdui 2.0 CSS -->
     <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
-    <!-- Self-hosted Material Symbols font (partial) -->
-    <link rel="stylesheet" href="css/font.css" />
-    <!-- Fallback Google Fonts full Material Symbols to ensure all glyphs present -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- Filled -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
+    <!-- Outlined -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
     <style>
         .hero-section {
             min-height: 60vh;
@@ -46,7 +46,8 @@
 
         /* 调整下载对话框中卡片内容的内边距，避免图标与按钮贴近边缘 */
         .download-card .mdui-card-content {
-            padding: 40px 40px 48px; /* 增加上下与底部留白 */
+            padding: 40px 40px 48px;
+            /* 增加上下与底部留白 */
         }
 
         /* 对话框里的平台图标与标题间距优化 */
@@ -657,15 +658,17 @@
                                             适用于 x86-64 Windows 10/11 的安装包
                                         </p>
                                         <mdui-button variant="filled" icon="file_download"
-                                            href="#"
+                                            href="https://github.com/shu-shu-1/Little-Tree-Wallpaper/releases/download/5/xiaoshu.wallpaper.5.1.windows.x64.setup.exe"
                                             class="version-download-btn">下载</mdui-button>
-                                        <mdui-button variant="text" icon="router">国内镜像</mdui-button>
+                                        <mdui-button variant="text" icon="router"
+                                            href="https://v6.gh-proxy.com/https://github.com/shu-shu-1/Little-Tree-Wallpaper/releases/download/5/xiaoshu.wallpaper.5.1.windows.x64.setup.exe">镜像</mdui-button>
                                     </div>
                                 </mdui-card>
                                 <p>暂不支持其他平台</p>
                             </div>
 
-                        <mdui-button onclick="document.querySelector('.download-dialog-1').open = false" slot="action" icon="close">关闭</mdui-button>
+                            <mdui-button onclick="document.querySelector('.download-dialog-1').open = false"
+                                slot="action" icon="close">关闭</mdui-button>
                         </mdui-dialog>
                         <div class="version-panel">
                             <div class="version-panel-left">
@@ -673,17 +676,16 @@
                                 <p class="mdui-typo-body-large version-desc">经过充分验证的稳定功能集合, 但功能较为基础</p>
                                 <div class="version-feature-list">
                                     <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 多源壁纸获取</div>
-                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 智能分类</div>
                                     <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 收藏管理</div>
                                     <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 自动更换</div>
-                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 跨平台支持</div>
                                 </div>
                                 <div class="version-actions">
                                     <mdui-button variant="filled" icon="file_download"
                                         onclick="document.querySelector('.download-dialog-1').open = true">
                                         下载
                                     </mdui-button>
-                                    <mdui-button variant="text" icon="code" href="https://github.com/shu-shu-1/Xiaoshu-Wallpaper/tree/5.1">源码</mdui-button>
+                                    <mdui-button variant="text" icon="code"
+                                        href="https://github.com/shu-shu-1/Little-Tree-Wallpaper/tree/5.1">源码</mdui-button>
                                 </div>
                             </div>
                             <div class="version-panel-right">
@@ -721,34 +723,55 @@
                                         <mdui-icon class="platform-icon" name="desktop_windows"></mdui-icon>
                                         <h3 class="mdui-typo-headline-small">Windows</h3>
                                         <p class="mdui-typo-body-small" style="opacity: .75; margin: 8px 0 16px;">
-                                            适用于 x86-64 Windows 10/11 的安装包
+                                            适用于 x86-64 Windows 10/11 的免安装程序
                                         </p>
                                         <mdui-button variant="filled" icon="file_download"
-                                            href="#"
+                                            href="https://github.com/shu-shu-1/Little-Tree-Wallpaper/releases/download/6rc2/Little.Tree.Wallpaper.win.amd64.v6.0.0.rc2.zip"
                                             class="version-download-btn">下载</mdui-button>
-                                        <mdui-button variant="text" icon="router">国内镜像</mdui-button>
+                                        <mdui-button variant="text" icon="router"
+                                            href="https://v6.gh-proxy.com/https://github.com/shu-shu-1/Little-Tree-Wallpaper/releases/download/6rc2/Little.Tree.Wallpaper.win.amd64.v6.0.0.rc2.zip">镜像</mdui-button>
                                     </div>
                                 </mdui-card>
                                 <p>暂不支持其他平台</p>
                             </div>
-                            <mdui-button onclick="document.querySelector('.download-dialog-2').open = false" slot="action" icon="close">关闭</mdui-button>
+                            <mdui-button onclick="document.querySelector('.download-dialog-2').open = false"
+                                slot="action" icon="close">关闭</mdui-button>
+                        </mdui-dialog>
+                        <mdui-dialog close-on-esc close-on-overlay-click class="test-warning-1">
+                            <div class="mdui-prose">
+                                <h3>测试版已知问题</h3>
+                                <ul>
+                                    <li>
+                                        <p>
+                                            1. 快捷面板点击详情无反应
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            2. 在进入 设置-更新 页后快速切换页面会导致更新检查结果显示在其他设置页
+                                        </p>
+                                    </li>
+
+                                </ul>
+                            </div>
                         </mdui-dialog>
                         <div class="version-panel">
                             <div class="version-panel-left">
                                 <h3 class="mdui-typo-headline-medium">6.0 测试版</h3>
                                 <p class="mdui-typo-body-large version-desc">包含尚在迭代中的新功能，可能存在少量问题。</p>
                                 <div class="version-feature-list">
+                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 更美观的界面</div>
                                     <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 脚本引擎支持</div>
-                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 全新 UI 界面</div>
                                     <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 性能优化</div>
-                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 高级搜索</div>
-                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 使用统计</div>
+                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 更多壁纸源</div>
+                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 动态壁纸</div>
                                 </div>
                                 <div class="version-actions">
                                     <mdui-button variant="filled" icon="file_download"
                                         onclick="document.querySelector('.download-dialog-2').open = true">下载测试版</mdui-button>
-                                    <mdui-button variant="text" icon="code" href="https://github.com/shu-shu-1/Xiaoshu-Wallpaper/tree/6.0">源码</mdui-button>
-                                    <mdui-button variant="text" icon="warning">已知问题</mdui-button>
+                                    <mdui-button variant="text" icon="code"
+                                        href="https://github.com/shu-shu-1/Little-Tree-Wallpaper">源码</mdui-button>
+                                    <mdui-button variant="text" icon="warning" onclick="document.querySelector('.test-warning-1').open = true">已知问题</mdui-button>
                                 </div>
                             </div>
                             <div class="version-panel-right">
@@ -781,7 +804,7 @@
                             <h1 class="mdui-typo-title">下载预览版 Next</h1>
                             <p class="mdui-typo-body">请选择适合您操作系统的平台进行下载：</p>
                             <div class="download-grid">
-                                <mdui-card class="download-card">
+                                <!-- <mdui-card class="download-card">
                                     <div class="mdui-card-content text-center">
                                         <mdui-icon class="platform-icon" name="desktop_windows"></mdui-icon>
                                         <h3 class="mdui-typo-headline-small">Windows</h3>
@@ -791,29 +814,37 @@
                                         <mdui-button variant="filled" icon="file_download"
                                             href="#"
                                             class="version-download-btn">下载</mdui-button>
-                                        <mdui-button variant="text" icon="router">国内镜像</mdui-button>
+                                        <mdui-button variant="text" icon="router">镜像</mdui-button>
                                     </div>
-                                </mdui-card>
-                                <p>暂不支持其他平台</p>
+                                </mdui-card> -->
+                                <p>暂无公开测试版本</p>
                             </div>
-                            <mdui-button onclick="document.querySelector('.download-dialog-3').open = false" slot="action" icon="close">关闭</mdui-button>
+                            <mdui-button onclick="document.querySelector('.download-dialog-3').open = false"
+                                slot="action" icon="close">关闭</mdui-button>
+                        </mdui-dialog>
+                        <mdui-dialog class="test-warning-2" close-on-esc close-on-overlay-click>
+                            <div class="mdui-prose">
+                                <h3>测试暂未开放</h3>
+                            </div>
                         </mdui-dialog>
                         <div class="version-panel">
                             <div class="version-panel-left">
                                 <h3 class="mdui-typo-headline-medium">Next 预览版</h3>
                                 <p class="mdui-typo-body-large version-desc">实验性特性提前预览，适合尝鲜用户。</p>
                                 <div class="version-feature-list">
+                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 更流畅和美观的界面</div>
                                     <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> AI 智能标签</div>
                                     <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 插件系统</div>
-                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 智能推荐</div>
-                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 云端同步</div>
-                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 交互式壁纸</div>
+                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 搜索壁纸</div>
+                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 嗅探壁纸</div>
+                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 更多壁纸源</div>
                                 </div>
                                 <div class="version-actions">
                                     <mdui-button variant="filled" icon="file_download"
                                         onclick="document.querySelector('.download-dialog-3').open = true">体验预览版</mdui-button>
-                                    <mdui-button variant="text" icon="code" href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet">源码</mdui-button>
-                                    <mdui-button variant="text" icon="psychology">实验说明</mdui-button>
+                                    <mdui-button variant="text" icon="code"
+                                        href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet">源码</mdui-button>
+                                    <mdui-button variant="text" icon="psychology" onclick="document.querySelector('.test-warning-2').open = true">实验说明</mdui-button>
                                 </div>
                             </div>
                             <div class="version-panel-right">
@@ -925,12 +956,12 @@
                                     <mdui-icon class="install-icon" name="code"></mdui-icon>
                                     <h3 class="mdui-typo-headline-medium">源码运行</h3>
                                 </div>
-                                <ol class="install-steps">
-                                    <li>克隆仓库：git clone ...</li>
-                                    <li>进入目录并创建虚拟环境</li>
-                                    <li>安装依赖：pip install -r requirements.txt</li>
-                                    <li>运行主程序：python main.py</li>
-                                </ol>
+                                <div class="install-content">
+                                    <p>我们建议使用uv来管理虚拟环境和运行小树壁纸
+                                        <br><br>使用源代码运行的版本可能不稳定
+                                        <br><br>请不要反馈非官方编译版本存在的问题
+                                    </p>
+                                </div>
                                 <div class="install-actions">
                                     <mdui-button variant="text" icon="code">查看 README</mdui-button>
                                 </div>
@@ -989,7 +1020,7 @@
 
             <div class="text-center">
                 <p class="mdui-typo-body-medium" style="opacity: 0.7;">
-                    © 2024 小树壁纸. 开源项目，遵循 MIT 许可证.
+                    版权所有 © 2023-2025 小树工作室。保留部分权利。
                 </p>
             </div>
         </div>
@@ -1084,10 +1115,10 @@
             }, 1500);
         }
 
-        // 国内镜像下载
+        // 镜像下载
         function downloadMirror(platform, version) {
             mdui.snackbar({
-                message: `正在跳转到国内镜像下载 ${platform.toUpperCase()} ${version} 版本...`,
+                message: `正在跳转到镜像下载 ${platform.toUpperCase()} ${version} 版本...`,
                 position: 'top',
                 autoCloseDelay: 3000
             });
