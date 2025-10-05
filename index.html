@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="renderer" content="webkit"/>
+    <title>小树壁纸 - 智能壁纸管理软件</title>
+    
+    <!-- mdui 2.0 CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
+    <!-- Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <style>
+        .hero-section {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,1000 1000,0 1000,1000"/><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,800 0,800"/></svg>');
+            pointer-events: none;
+        }
+        
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+        
+        .download-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        
+        .download-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .platform-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+            color: var(--mdui-color-primary);
+        }
+        
+        .section-padding {
+            padding: 80px 0;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .version-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+        
+        .version-comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+        
+        .version-card-padding {
+            padding: 32px;
+            position: relative;
+        }
+        
+        .version-description {
+            margin: 16px 0;
+            opacity: 0.7;
+        }
+        
+        .version-features {
+            margin: 32px 0;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        
+        .feature-icon {
+            color: var(--mdui-color-primary);
+            margin-right: 8px;
+        }
+        
+        .version-download-btn {
+            width: 100%;
+        }
+        
+        .version-recommended {
+            border: 2px solid var(--mdui-color-primary);
+        }
+        
+        .version-badge-beta {
+            background-color: var(--mdui-color-primary);
+            color: white;
+        }
+        
+        .version-badge-next {
+            background-color: var(--mdui-color-error);
+            color: white;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mdui-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* 新增首页 CTA 样式 */
+        .cta-experience-card { padding: 8px 8px 16px; overflow: hidden; }
+        .cta-experience-inner { display:flex; align-items:center; justify-content:space-between; gap:48px; padding:48px; position:relative; }
+        .cta-text { max-width:640px; }
+        .cta-sub { margin:16px 0 32px; opacity:.75; }
+        .cta-actions mdui-button + mdui-button { margin-left:16px; }
+        .cta-primary-btn { --mdui-comp-button-filled-container-shape: 999px; }
+        .cta-illustration { flex:1; display:flex; justify-content:center; align-items:center; }
+        @media (max-width: 960px){
+          .cta-experience-inner { flex-direction:column; text-align:center; padding:40px 32px; }
+          .cta-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:16px; }
+          .cta-actions mdui-button + mdui-button { margin-left:0; }
+          .cta-illustration { order:-1; }
+        }
+        @media (max-width:600px){
+          .cta-experience-inner { padding:32px 24px; }
+          .cta-primary-btn { width:100%; }
+          .cta-actions mdui-button { flex:1 1 100%; }
+        }
+        
+        /* 横屏优化 */
+        @media (orientation: landscape) and (max-width: 1024px) {
+            .hero-section {
+                min-height: 70vh;
+                padding: 40px 0;
+            }
+            
+            .hero-section h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-section .mdui-typo-headline-small {
+                font-size: 1.5rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .version-comparison-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+            
+            .mdui-container {
+                padding: 0 16px;
+            }
+            
+            .section-padding {
+                padding: 60px 0;
+            }
+        }
+        
+        /* 横屏小屏幕优化 */
+        @media (orientation: landscape) and (max-width: 768px) {
+            .hero-section {
+                min-height: 60vh;
+                padding: 30px 0;
+            }
+            
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-section .mdui-typo-headline-small {
+                font-size: 1.25rem;
+            }
+            
+            .section-padding {
+                padding: 40px 0;
+            }
+            
+            .mdui-top-app-bar {
+                --mdui-top-app-bar-height: 56px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .version-comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .download-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+        }
+        
+        /* 竖屏优化 */
+        @media (orientation: portrait) {
+            .hero-section {
+                min-height: 50vh;
+                padding: 60px 0;
+            }
+            
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-section .mdui-typo-headline-small {
+                font-size: 1.25rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .version-comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .download-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .mdui-col-sm-6 {
+                width: 100%;
+            }
+        }
+        
+        /* 更好的触摸体验 */
+        @media (hover: none) and (pointer: coarse) {
+            .download-card:hover,
+            .feature-card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+            
+            .download-card:active,
+            .feature-card:active {
+                transform: scale(0.98);
+            }
+            
+            .mdui-button {
+                min-height: 48px;
+            }
+        }
+        
+        /* 横屏时的导航优化 */
+        @media (orientation: landscape) and (max-height: 500px) {
+            .mdui-top-app-bar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 1000;
+            }
+            
+            .mdui-layout-main {
+                padding-top: 56px;
+            }
+            
+            .hero-section {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+            }
+            
+            .hero-section .mdui-container {
+                padding-top: 20px;
+            }
+        }
+        
+        /* 防止横屏时内容溢出 */
+        @media (orientation: landscape) and (max-width: 1024px) {
+            body {
+                overflow-x: hidden;
+            }
+            
+            .mdui-row-gap {
+                margin: 0 -8px;
+            }
+            
+            .mdui-col-sm-6,
+            .mdui-col-md-3,
+            .mdui-col-md-4 {
+                padding: 0 8px;
+            }
+        }
+        
+        /* 更好的响应式间距 */
+        .section-padding {
+            padding: clamp(40px, 8vw, 80px) 0;
+        }
+        
+        /* 横屏时的按钮布局优化 */
+        @media (orientation: landscape) {
+            .hero-section .mdui-row-gap {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 16px;
+                justify-content: center;
+            }
+            
+            .hero-section .mdui-col-sm-6 {
+                flex: 0 0 auto;
+                width: auto;
+                min-width: 200px;
+            }
+        }
+        
+        /* 大屏幕优化 */
+        @media (min-width: 1200px) {
+            .hero-section {
+                min-height: 80vh;
+            }
+            
+            .hero-section h1 {
+                font-size: 4rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .download-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+    /* 小屏幕优化 */
+    @media (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-section .mdui-typo-headline-small {
+                font-size: 1.1rem;
+            }
+            
+            .mdui-container {
+                padding: 0 16px;
+            }
+            
+            .section-padding {
+                padding: 40px 0;
+            }
+        }
+
+        /* utility spacer */
+        .flex-grow-spacer { flex-grow: 1; }
+    </style>
+    <mdui-top-app-bar>
+        <mdui-button-icon icon="menu" onclick="toggleDrawer()"></mdui-button-icon>
+        <mdui-top-app-bar-title>小树壁纸</mdui-top-app-bar-title>
+        <div class="flex-grow-spacer"></div>
+        <mdui-button href="https://github.com/shu-shu-1/Little-Tree-Wallpaper" target="_blank">
+            <mdui-icon name="star"></mdui-icon>
+            开源仓库
+        </mdui-button>
+        <mdui-button href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet" target="_blank">
+            <mdui-icon name="star"></mdui-icon>
+            开源仓库(Next)
+        </mdui-button>
+
+        
+        <!-- 主题切换 -->
+        <mdui-button-icon 
+            icon="brightness_6" 
+            onclick="toggleTheme()"
+            id="theme-toggle">
+        </mdui-button-icon>
+    </mdui-top-app-bar>
+
+    <!-- 侧边抽屉导航 -->
+    <mdui-navigation-drawer id="drawer" close-on-overlay-click>
+        <mdui-list>
+            <mdui-list-item href="/download.html">下载中心</mdui-list-item>
+            <mdui-list-item href="#features">功能特性</mdui-list-item>
+            <mdui-list-item href="#download">下载</mdui-list-item>
+            <mdui-list-item href="https://github.com/shu-shu-1/Little-Tree-Wallpaper" target="_blank">开源仓库</mdui-list-item>
+            <mdui-list-item href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet" target="_blank">开源仓库(Next)</mdui-list-item>
+
+        </mdui-list>
+    </mdui-navigation-drawer>
+
+    <!-- 主要内容 -->
+    <mdui-layout-main>
+        <!-- Hero 区域 -->
+        <section class="hero-section">
+            <div class="mdui-container">
+                <h1 class="mdui-typo-display-large">小树壁纸</h1>
+                <p class="mdui-typo-headline-small" style="margin: 24px 0; opacity: 0.9;">
+                    智能壁纸管理软件，让您的桌面焕然一新
+                </p>
+                <p class="mdui-typo-body-large" style="opacity: 0.8; margin-bottom: 48px;">
+                    支持多平台、多版本切换，完全开源，Python开发
+                </p>
+                
+                <div class="mdui-row-gap" style="row-gap: 16px;">
+                    <div class="mdui-col-sm-6">
+                        <mdui-button 
+                            href="#download" 
+                            variant="filled" 
+                            icon="file_download"
+                            style="width: 100%; min-height: 56px;">
+                            立即下载
+                        </mdui-button>
+                    </div>
+                    <div class="mdui-col-sm-6">
+                        <mdui-button 
+                            href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet" 
+                            target="_blank"
+                            variant="tonal"
+                            icon="code"
+                            style="width: 100%; min-height: 56px;">
+                            查看源码(Next)
+                        </mdui-button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 功能特性 -->
+        <section id="features" class="section-padding">
+            <div class="mdui-container">
+                <div class="text-center" style="margin-bottom: 64px;">
+                    <h2 class="mdui-typo-display-medium text-gradient">软件亮点</h2>
+                    <p class="mdui-typo-body-large" style="margin-top: 16px; opacity: 0.7;">
+                        强大的功能，简洁的设计，让您的壁纸管理更加智能
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+                    <mdui-card class="feature-card">
+                        <div style="padding: 32px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                                <span class="material-symbols-outlined" style="font-size: 48px; color: var(--mdui-color-primary); margin-right: 16px;">wallpaper</span>
+                                <h3 class="mdui-typo-headline-small">多源壁纸获取</h3>
+                            </div>
+                            <p class="mdui-typo-body-medium" style="opacity: 0.7;">
+                                支持Bing每日壁纸、Windows聚焦、Unsplash等多个高质量壁纸源，每日自动更新精美壁纸
+                            </p>
+                        </div>
+                    </mdui-card>
+
+                    <mdui-card class="feature-card">
+                        <div style="padding: 32px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                                <span class="material-symbols-outlined" style="font-size: 48px; color: var(--mdui-color-primary); margin-right: 16px;">category</span>
+                                <h3 class="mdui-typo-headline-small">智能分类</h3>
+                            </div>
+                            <p class="mdui-typo-body-medium" style="opacity: 0.7;">
+                                按风景、动漫、游戏、艺术等分类整理壁纸，支持随机获取不同分类的精美壁纸
+                            </p>
+                        </div>
+                    </mdui-card>
+
+                    <mdui-card class="feature-card">
+                        <div style="padding: 32px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                                <span class="material-symbols-outlined" style="font-size: 48px; color: var(--mdui-color-primary); margin-right: 16px;">favorite</span>
+                                <h3 class="mdui-typo-headline-small">收藏管理</h3>
+                            </div>
+                            <p class="mdui-typo-body-medium" style="opacity: 0.7;">
+                                一键收藏喜欢的壁纸，支持本地收藏夹管理，轻松打造个人壁纸库
+                            </p>
+                        </div>
+                    </mdui-card>
+
+                    <mdui-card class="feature-card">
+                        <div style="padding: 32px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                                <span class="material-symbols-outlined" style="font-size: 48px; color: var(--mdui-color-primary); margin-right: 16px;">autorenew</span>
+                                <h3 class="mdui-typo-headline-small">自动更换</h3>
+                            </div>
+                            <p class="mdui-typo-body-medium" style="opacity: 0.7;">
+                                开机自启，定时自动更换壁纸，支持自定义更换频率和时间间隔
+                            </p>
+                        </div>
+                    </mdui-card>
+
+                    <mdui-card class="feature-card">
+                        <div style="padding: 32px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                                <span class="material-symbols-outlined" style="font-size: 48px; color: var(--mdui-color-primary); margin-right: 16px;">devices</span>
+                                <h3 class="mdui-typo-headline-small">跨平台支持</h3>
+                            </div>
+                            <p class="mdui-typo-body-medium" style="opacity: 0.7;">
+                                支持Windows、macOS、Linux等主流操作系统，一次配置，多平台使用
+                            </p>
+                        </div>
+                    </mdui-card>
+
+                    <mdui-card class="feature-card">
+                        <div style="padding: 32px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                                <span class="material-symbols-outlined" style="font-size: 48px; color: var(--mdui-color-primary); margin-right: 16px;">animation</span>
+                                <h3 class="mdui-typo-headline-small">动态壁纸</h3>
+                            </div>
+                            <p class="mdui-typo-body-medium" style="opacity: 0.7;">
+                                支持动态壁纸和视频壁纸，让您的桌面更加生动有趣
+                            </p>
+                        </div>
+                    </mdui-card>
+
+                    <mdui-card class="feature-card">
+                        <div style="padding: 32px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                                <span class="material-symbols-outlined" style="font-size: 48px; color: var(--mdui-color-primary); margin-right: 16px;">code</span>
+                                <h3 class="mdui-typo-headline-small">完全开源</h3>
+                            </div>
+                            <p class="mdui-typo-body-medium" style="opacity: 0.7;">
+                                基于Python开发，完全开源免费，欢迎社区贡献和二次开发
+                            </p>
+                        </div>
+                    </mdui-card>
+
+                    <mdui-card class="feature-card">
+                        <div style="padding: 32px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                                <span class="material-symbols-outlined" style="font-size: 48px; color: var(--mdui-color-primary); margin-right: 16px;">psychology</span>
+                                <h3 class="mdui-typo-headline-small">AI智能标签</h3>
+                            </div>
+                            <p class="mdui-typo-body-medium" style="opacity: 0.7;">
+                                Next版本支持AI智能识别壁纸内容，自动生成标签，让搜索更加精准
+                            </p>
+                        </div>
+                    </mdui-card>
+                </div>
+            </div>
+        </section>
+
+        <!-- 版本对比 -->
+        <section id="version-comparison" class="section-padding" style="background: var(--mdui-color-surface-variant);">
+            <div class="mdui-container">
+                <div class="text-center" style="margin-bottom: 64px;">
+                    <h2 class="mdui-typo-display-medium text-gradient">版本对比</h2>
+                    <p class="mdui-typo-body-large" style="margin-top: 16px; opacity: 0.7;">
+                        选择最适合您的版本
+                    </p>
+                </div>
+
+                <div class="version-comparison-grid">
+                    <mdui-card class="feature-card">
+                        <div class="version-card-padding">
+                            <mdui-chip class="version-badge" icon="shield">稳定版</mdui-chip>
+                            <div class="text-center">
+                                <h3 class="mdui-typo-headline-medium">5.1 稳定版</h3>
+                                <p class="mdui-typo-body-large version-description">最新稳定版本</p>
+                                
+                                <div class="version-features">
+                                    <div class="feature-item">
+                                        <span class="material-symbols-outlined feature-icon">check_circle</span>
+                                        <span class="mdui-typo-body-medium">多源壁纸获取</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="material-symbols-outlined feature-icon">check_circle</span>
+                                        <span class="mdui-typo-body-medium">智能分类</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="material-symbols-outlined feature-icon">check_circle</span>
+                                        <span class="mdui-typo-body-medium">收藏管理</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="material-symbols-outlined feature-icon">check_circle</span>
+                                        <span class="mdui-typo-body-medium">自动更换</span>
+                                    </div>
+                                </div>
+                                
+                                <mdui-button 
+                                    href="download.html" 
+                                    variant="filled" 
+                                    icon="file_download"
+                                    class="version-download-btn">
+                                    下载 5.1 版
+                                </mdui-button>
+                            </div>
+                        </div>
+                    </mdui-card>
+
+                    <mdui-card class="feature-card version-recommended">
+                        <div class="version-card-padding">
+                            <mdui-chip class="version-badge" icon="science" class="version-badge-beta">测试版</mdui-chip>
+                            <div class="text-center">
+                                <h3 class="mdui-typo-headline-medium">6.0 测试版</h3>
+                                <p class="mdui-typo-body-large version-description">包含新功能</p>
+                                
+                                <div class="version-features">
+                                    <div class="feature-item">
+                                        <span class="material-symbols-outlined feature-icon">check_circle</span>
+                                        <span class="mdui-typo-body-medium">脚本引擎支持</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="material-symbols-outlined feature-icon">check_circle</span>
+                                        <span class="mdui-typo-body-medium">全新UI界面</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="material-symbols-outlined feature-icon">check_circle</span>
+                                        <span class="mdui-typo-body-medium">性能优化</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="material-symbols-outlined feature-icon">check_circle</span>
+                                        <span class="mdui-typo-body-medium">高级搜索</span>
+                                    </div>
+                                </div>
+                                
+                                <mdui-button 
+                                    href="download.html" 
+                                    variant="filled" 
+                                    icon="file_download"
+                                    class="version-download-btn">
+                                    下载 6.0 版
+                                </mdui-button>
+                            </div>
+                        </div>
+                    </mdui-card>
+
+                    <mdui-card class="feature-card">
+                        <div class="version-card-padding">
+                            <mdui-chip class="version-badge" icon="watch_later" class="version-badge-next">预览版</mdui-chip>
+                            <div class="text-center">
+                                <h3 class="mdui-typo-headline-medium">Next 预览版</h3>
+                                <p class="mdui-typo-body-large version-description">实验性功能</p>
+                                
+                                <div class="version-features">
+                                    <div class="feature-item">
+                                        <span class="material-symbols-outlined feature-icon">check_circle</span>
+                                        <span class="mdui-typo-body-medium">AI智能标签</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="material-symbols-outlined feature-icon">check_circle</span>
+                                        <span class="mdui-typo-body-medium">插件系统</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="material-symbols-outlined feature-icon">check_circle</span>
+                                        <span class="mdui-typo-body-medium">智能推荐</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="material-symbols-outlined feature-icon">check_circle</span>
+                                        <span class="mdui-typo-body-medium">云端同步</span>
+                                    </div>
+                                </div>
+                                
+                                <mdui-button 
+                                    href="download.html" 
+                                    variant="filled" 
+                                    icon="file_download"
+                                    class="version-download-btn">
+                                    下载 Next 版
+                                </mdui-button>
+                            </div>
+                        </div>
+                    </mdui-card>
+                </div>
+            </div>
+        </section>
+
+        <!-- 快速下载 -->
+        <section id="download" class="section-padding">
+            <div class="mdui-container">
+                <mdui-card class="cta-experience-card" variant="outlined">
+                    <div class="cta-experience-inner">
+                        <div class="cta-text">
+                            <h2 class="mdui-typo-display-small text-gradient">立即体验</h2>
+                            <p class="mdui-typo-body-large cta-sub">一键进入下载中心，选择适合您的平台与版本，开始智能壁纸之旅</p>
+                            <div class="cta-actions">
+                                <mdui-button href="download.html" variant="filled" icon="file_download" class="cta-primary-btn">进入下载中心</mdui-button>
+                                <mdui-button href="download.html#install" variant="outlined" icon="menu_book">查看安装指南</mdui-button>
+                            </div>
+                        </div>
+                        <div class="cta-illustration">
+                            <mdui-icon name="wallpaper" style="font-size:128px; opacity:.15;"></mdui-icon>
+                        </div>
+                    </div>
+                </mdui-card>
+            </div>
+        </section>
+
+    </mdui-layout-main>
+
+    <!-- 页脚 -->
+    <footer style="background: var(--mdui-color-surface); padding: 48px 0; margin-top: 80px;">
+        <div class="mdui-container">
+            <div class="mdui-row-gap" style="row-gap: 24px;">
+                <div class="mdui-col-md-6">
+                    <h3 class="mdui-typo-headline-small">小树壁纸</h3>
+                    <p class="mdui-typo-body-medium" style="margin-top: 16px; opacity: 0.7;">
+                        智能壁纸管理软件，让您的桌面焕然一新
+                    </p>
+                    <div style="margin-top: 24px;">
+                        <mdui-button href="https://github.com/shu-shu-1/Little-Tree-Wallpaper" target="_blank" variant="text" icon="code">
+                            源代码
+                        </mdui-button>
+                        <mdui-button href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet" target="_blank" variant="text" icon="code">
+                            源代码-Next
+                        </mdui-button>                        
+                        <mdui-button href="#" variant="text" icon="help">
+                            帮助文档
+                        </mdui-button>
+                        <mdui-button href="#" variant="text" icon="mail">
+                            联系我们
+                        </mdui-button>
+                    </div>
+                </div>
+                
+                <div class="mdui-col-md-6">
+                    <h4 class="mdui-typo-title-medium">快速链接</h4>
+                    <div class="mdui-row-gap" style="row-gap: 16px; margin-top: 16px;">
+                        <div class="mdui-col-sm-6">
+                            <mdui-list>
+                                <mdui-list-item href="#features">功能特性</mdui-list-item>
+                                <mdui-list-item href="#download">快速下载</mdui-list-item>
+                                <mdui-list-item href="download.html">下载中心</mdui-list-item>
+                            </mdui-list>
+                        </div>
+                        <div class="mdui-col-sm-6">
+                            <mdui-list>
+                                <mdui-list-item href="#">更新日志</mdui-list-item>
+                                <mdui-list-item href="#">问题反馈</mdui-list-item>
+                                <mdui-list-item href="#">隐私政策</mdui-list-item>
+                            </mdui-list>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <mdui-divider style="margin: 32px 0;"></mdui-divider>
+            
+            <div class="text-center">
+                <p class="mdui-typo-body-medium" style="opacity: 0.7;">
+                    版权所有 © 2023-2025 小树工作室。保留部分权利。
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- mdui 2.0 JS -->
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    
+    <script>
+        // 侧边抽屉控制
+        function toggleDrawer() {
+            const drawer = document.getElementById('drawer');
+            drawer.open = !drawer.open;
+        }
+        
+        // 主题切换
+        function toggleTheme() {
+            const currentTheme = mdui.getTheme();
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            mdui.setTheme(newTheme);
+            
+            // 更新图标
+            const themeIcon = document.getElementById('theme-toggle');
+            themeIcon.setAttribute('icon', newTheme === 'light' ? 'brightness_3' : 'brightness_7');
+            
+            // 显示提示
+            mdui.snackbar({
+                message: `已切换到${newTheme === 'light' ? '浅色' : '深色'}主题`,
+                position: 'top'
+            });
+        }
+        
+        // 显示下载对话框
+        function showDownloadDialog(platform) {
+            const dialog = mdui.dialog({
+                headline: `下载 ${platform.toUpperCase()} 版`,
+                body: `
+                    <div style="text-align: center; padding: 24px;">
+                        <div style="margin-bottom: 24px;">
+                            <span class="material-symbols-outlined" style="font-size: 64px; color: var(--mdui-color-primary);">
+                                download
+                            </span>
+                        </div>
+                        <p class="mdui-typo-body-large" style="margin-bottom: 32px;">
+                            选择您需要的版本进行下载
+                        </p>
+                        <div style="display: flex; flex-direction: column; gap: 16px; max-width: 300px; margin: 0 auto;">
+                            <mdui-button variant="filled" href="download.html" icon="shield">
+                                5.1 稳定版
+                            </mdui-button>
+                            <mdui-button variant="outlined" href="download.html" icon="science">
+                                6.0 测试版
+                            </mdui-button>
+                            <mdui-button variant="text" href="download.html" icon="rocket_launch">
+                                Next 预览版
+                            </mdui-button>
+                        </div>
+                        <div style="margin-top: 24px;">
+                            <mdui-button variant="text" onclick="this.parentElement.parentElement.parentElement.parentElement.close()">
+                                取消
+                            </mdui-button>
+                        </div>
+                    </div>
+                `,
+                closeOnEsc: true,
+                closeOnOverlayClick: true
+            });
+        }
+        
+        // 初始化主题
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        mdui.setTheme(savedTheme);
+        const themeIcon = document.getElementById('theme-toggle');
+        themeIcon.setAttribute('icon', savedTheme === 'light' ? 'brightness_3' : 'brightness_7');
+        
+        // 保存主题设置
+        window.addEventListener('themechange', function(e) {
+            localStorage.setItem('theme', e.detail.theme);
+        });
+        
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 显示欢迎消息
+            setTimeout(() => {
+                mdui.snackbar({
+                    message: '欢迎来到小树壁纸官网！',
+                    position: 'top',
+                    autoCloseDelay: 3000
+                });
+            }, 1000);
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
