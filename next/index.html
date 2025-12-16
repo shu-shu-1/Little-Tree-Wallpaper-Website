@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="renderer" content="webkit"/>
+    <title>小树壁纸 Next - 下一代壁纸体验</title>
+    <link rel="icon" href="icon.ico" type="image/x-icon">
+    
+    <!-- mdui 2.0 CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    
+    <style>
+        :root {
+            --mdui-color-primary: #0061a4;
+            --mdui-color-on-primary: #ffffff;
+            --mdui-color-primary-container: #d1e4ff;
+            --mdui-color-on-primary-container: #001d36;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: rgb(var(--mdui-color-surface));
+            color: rgb(var(--mdui-color-on-surface));
+        }
+
+        /* 导航栏样式调整 */
+        mdui-top-app-bar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        
+        mdui-tabs {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #e0f7fa 0%, #e8eaf6 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 40px 24px;
+        }
+
+        /* 暗色模式适配 Hero 背景 */
+        @media (prefers-color-scheme: dark) {
+            .hero-section {
+                background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            }
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .hero-text {
+            text-align: left;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0 0 24px 0;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #0061a4, #00a8cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .hero-image-placeholder {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: rgba(var(--mdui-color-surface-variant), 0.5);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(var(--mdui-color-outline), 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-image-placeholder::after {
+            content: 'UI Preview';
+            font-size: 2rem;
+            opacity: 0.2;
+            font-weight: bold;
+        }
+
+        /* Features Section */
+        .section {
+            padding: 100px 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        /* 自定义卡片样式以符合 MD3 */
+        .feature-card {
+            padding: 32px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--mdui-elevation-level2);
+        }
+
+        .feature-icon-wrapper {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background-color: rgb(var(--mdui-color-secondary-container));
+            color: rgb(var(--mdui-color-on-secondary-container));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .feature-card h3 {
+            margin: 0 0 12px 0;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            margin: 0;
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: rgb(var(--mdui-color-surface-container));
+            padding: 60px 24px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-link {
+            color: rgb(var(--mdui-color-on-surface));
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .footer-link:hover {
+            opacity: 1;
+        }
+
+        /* Download Page Styles */
+        .download-header {
+            background: linear-gradient(135deg, #e0f7fa 0%, #e8eaf6 100%);
+            width: 100%;
+            padding: 80px 24px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .download-header {
+                background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            }
+        }
+
+        .header-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 0 0 16px 0;
+            background: linear-gradient(45deg, #0061a4, #00a8cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .download-container {
+            max-width: 900px;
+            width: 100%;
+            padding: 0 24px;
+            margin-top: -40px;
+            margin-bottom: 60px;
+            z-index: 1;
+        }
+
+        .download-card {
+            padding: 40px;
+            border-radius: 24px;
+            background-color: rgb(var(--mdui-color-surface));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .platform-icon {
+            font-size: 64px;
+            color: rgb(var(--mdui-color-primary));
+            margin-bottom: 24px;
+        }
+
+        .version-info {
+            background-color: rgb(var(--mdui-color-secondary-container));
+            color: rgb(var(--mdui-color-on-secondary-container));
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warning-box {
+            background-color: rgb(var(--mdui-color-error-container));
+            color: rgb(var(--mdui-color-on-error-container));
+            padding: 16px;
+            border-radius: 12px;
+            margin: 24px 0;
+            text-align: left;
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .download-options {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 960px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text {
+                text-align: center;
+                order: 2;
+            }
+
+            .hero-image-placeholder {
+                order: 1;
+                margin-bottom: 32px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .action-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航栏 -->
+    <mdui-top-app-bar variant="small" scroll-behavior="elevate">
+        <mdui-button-icon icon="menu" class="mobile-menu-btn"></mdui-button-icon>
+        <img src="icon.ico" alt="Logo" style="height: 32px; margin-left: 8px; border-radius: 50%;">
+        <mdui-top-app-bar-title>小树壁纸 Next</mdui-top-app-bar-title>
+        <div style="flex-grow: 1"></div>
+        
+        <!-- 桌面端导航链接 -->
+        <div class="desktop-nav" style="display: flex; gap: 8px; margin-right: 16px;">
+            <mdui-button variant="text" onclick="switchTab('home')">首页</mdui-button>
+            <mdui-button variant="text" onclick="switchTab('download')">下载</mdui-button>
+            <mdui-button variant="text" href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet" target="_blank">GitHub</mdui-button>
+            <mdui-button variant="tonal" href="../index.html" icon="arrow_back">返回主站</mdui-button>
+        </div>
+    </mdui-top-app-bar>
+
+    <div class="main-content">
+        <mdui-tabs value="home" id="main-tabs">
+            <mdui-tab value="home" style="display: none;"></mdui-tab>
+            <mdui-tab value="download" style="display: none;"></mdui-tab>
+
+            <mdui-tab-panel slot="panel" value="home">
+                <!-- Hero 区域 -->
+                <section class="hero-section">
+                    <div class="hero-container">
+                        <div class="hero-text">
+                            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgb(var(--mdui-color-secondary-container)); color: rgb(var(--mdui-color-on-secondary-container)); padding: 6px 16px; border-radius: 100px; margin-bottom: 24px; font-size: 0.875rem; font-weight: 500;">
+                                <mdui-icon name="science" style="font-size: 18px;"></mdui-icon>
+                                预览版现已发布
+                            </div>
+                            <h1 class="hero-title">重塑你的<br>桌面壁纸体验</h1>
+                            <p class="hero-subtitle">
+                                小树壁纸 Next 是基于全新架构打造的下一代壁纸管理工具。
+                                <br>更智能的 AI 识别，更流畅的 Material Design 界面，以及无限可能的插件系统。
+                            </p>
+                            <div class="action-buttons" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                                <mdui-button onclick="switchTab('download')" variant="filled" size="large" icon="download">
+                                    下载预览版
+                                </mdui-button>
+                                <mdui-button href="#features" variant="outlined" size="large" icon="expand_more">
+                                    了解更多
+                                </mdui-button>
+                            </div>
+                        </div>
+                        <div class="hero-image-placeholder">
+                            <!-- 这里未来可以放置实际的软件截图 -->
+                            <mdui-icon name="wallpaper" style="font-size: 120px; opacity: 0.1;"></mdui-icon>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 特性介绍 -->
+                <section id="features" class="section">
+                    <div class="container">
+                        <h2 class="section-title">为什么选择 小树壁纸 Next?</h2>
+                        <div class="features-grid">
+                            <mdui-card class="feature-card" variant="elevated">
+                                <div class="feature-icon-wrapper">
+                                    <mdui-icon name="speed"></mdui-icon>
+                                </div>
+                                <h3>极致性能</h3>
+                                <p>基于 Flet 框架重构，底层优化，启动速度提升 50%，内存占用大幅降低。告别卡顿，享受丝滑操作。</p>
+                            </mdui-card>
+
+                            <mdui-card class="feature-card" variant="elevated">
+                                <div class="feature-icon-wrapper">
+                                    <mdui-icon name="auto_awesome"></mdui-icon>
+                                </div>
+                                <h3>AI 智能赋能</h3>
+                                <p>内置本地 AI 引擎，自动识别壁纸内容并生成标签。让你的壁纸库井井有条，搜索从未如此精准。</p>
+                            </mdui-card>
+
+                            <mdui-card class="feature-card" variant="elevated">
+                                <div class="feature-icon-wrapper">
+                                    <mdui-icon name="extension"></mdui-icon>
+                                </div>
+                                <h3>插件生态系统</h3>
+                                <p>开放的插件 API，支持社区开发的丰富插件。无论是新的壁纸源还是实用工具，都能轻松扩展。</p>
+                            </mdui-card>
+
+                            <mdui-card class="feature-card" variant="elevated">
+                                <div class="feature-icon-wrapper">
+                                    <mdui-icon name="palette"></mdui-icon>
+                                </div>
+                                <h3>Material You</h3>
+                                <p>全面遵循 Material Design 3 设计规范，支持动态取色主题。界面随心而动，赏心悦目。</p>
+                            </mdui-card>
+
+                            <mdui-card class="feature-card" variant="elevated">
+                                <div class="feature-icon-wrapper">
+                                    <mdui-icon name="auto_mode"></mdui-icon>
+                                </div>
+                                <h3>自动化</h3>
+                                <p>支持定时任务与自动化流程，让壁纸更换更加智能与便捷。</p>
+                            </mdui-card>
+
+                            <mdui-card class="feature-card" variant="elevated">
+                                <div class="feature-icon-wrapper">
+                                    <mdui-icon name="security"></mdui-icon>
+                                </div>
+                                <h3>隐私安全</h3>
+                                <p>完全开源，代码透明。所有 AI 处理均在本地完成，无需上传图片，保护您的隐私安全。</p>
+                            </mdui-card>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 呼吁行动 -->
+                <section class="section" style="background-color: rgb(var(--mdui-color-primary-container)); color: rgb(var(--mdui-color-on-primary-container)); text-align: center; border-radius: 32px; margin: 0 24px;">
+                    <div class="container">
+                        <h2 style="font-size: 2rem; margin-bottom: 16px;">准备好体验未来了吗？</h2>
+                        <p style="font-size: 1.1rem; opacity: 0.8; margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                            小树壁纸 Next 目前处于预览阶段，欢迎开发者和尝鲜用户下载体验并提供反馈。
+                        </p>
+                        <mdui-button onclick="switchTab('download')" variant="filled" size="large" icon="rocket_launch">
+                            立即下载
+                        </mdui-button>
+                    </div>
+                </section>
+            </mdui-tab-panel>
+
+            <mdui-tab-panel slot="panel" value="download">
+                <div class="download-header">
+                    <h1 class="header-title">获取预览版</h1>
+                    <p class="header-subtitle">抢先体验下一代壁纸管理工具的最新特性。请注意，预览版可能包含未修复的错误。</p>
+                </div>
+
+                <div class="download-container" style="margin: -40px auto 60px; max-width: 900px; padding: 0 24px; position: relative; z-index: 1;">
+                    <mdui-card class="download-card" variant="elevated" style="padding: 40px; border-radius: 24px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <mdui-icon name="science" class="platform-icon" style="font-size: 64px; color: rgb(var(--mdui-color-primary)); margin-bottom: 24px;"></mdui-icon>
+                        
+                        <div class="version-info" style="background-color: rgb(var(--mdui-color-secondary-container)); color: rgb(var(--mdui-color-on-secondary-container)); padding: 8px 16px; border-radius: 100px; font-weight: 500; margin-bottom: 24px; display: inline-flex; align-items: center; gap: 8px;">
+                            <mdui-icon name="info" style="font-size: 18px;"></mdui-icon>
+                            当前版本: v0.1.0 Preview
+                        </div>
+
+                        <h2 style="margin: 0 0 16px 0;">Windows 预览版</h2>
+                        <p style="opacity: 0.7; max-width: 500px; margin-bottom: 0;">
+                            适用于 Windows 10 (1903+) 和 Windows 11。
+                            <br>无需安装，解压即用。
+                        </p>
+
+                        <div class="warning-box" style="background-color: rgb(var(--mdui-color-error-container)); color: rgb(var(--mdui-color-on-error-container)); padding: 16px; border-radius: 12px; margin: 24px 0; text-align: left; width: 100%; max-width: 600px; display: flex; gap: 16px; align-items: flex-start;">
+                            <mdui-icon name="warning" style="color: inherit;"></mdui-icon>
+                            <div>
+                                <div style="font-weight: bold; margin-bottom: 4px;">实验性版本</div>
+                                <div style="font-size: 0.9rem; opacity: 0.9;">
+                                    此版本主要用于功能展示和测试，不建议在生产环境中使用。可能会遇到崩溃或数据丢失的情况。
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="download-options" style="display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; justify-content: center;">
+                            <mdui-button href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet" target="_blank" variant="filled" size="large" icon="file_download">
+                                前往 GitHub 下载
+                            </mdui-button>
+                            <mdui-button href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet" target="_blank" variant="outlined" size="large" icon="code">
+                                查看源代码
+                            </mdui-button>
+                        </div>
+                        
+                        <div style="margin-top: 32px; padding-top: 32px; border-top: 1px solid rgba(var(--mdui-color-outline), 0.2); width: 100%;">
+                            <h3 style="font-size: 1.1rem; margin-bottom: 16px;">系统要求</h3>
+                            <div style="display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; text-align: left;">
+                                <div>
+                                    <div style="font-weight: bold; font-size: 0.9rem; opacity: 0.7;">操作系统</div>
+                                    <div>Windows 10/11 64-bit</div>
+                                </div>
+                                <div>
+                                    <div style="font-weight: bold; font-size: 0.9rem; opacity: 0.7;">内存</div>
+                                    <div>2GB RAM 或更多</div>
+                                </div>
+                                <div>
+                                    <div style="font-weight: bold; font-size: 0.9rem; opacity: 0.7;">存储空间</div>
+                                    <div>300MB 可用空间</div>
+                                </div>
+                            </div>
+                        </div>
+                    </mdui-card>
+                </div>
+            </mdui-tab-panel>
+        </mdui-tabs>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="font-weight: bold; font-size: 1.2rem;">小树壁纸 Next</span>
+                <span style="font-size: 0.8rem; opacity: 0.6;">v0.1.0 Preview</span>
+            </div>
+            <div class="footer-links">
+                <a href="javascript:void(0)" onclick="switchTab('home')" class="footer-link">首页</a>
+                <a href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet" class="footer-link" target="_blank">GitHub</a>
+                <a href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet/issues" class="footer-link" target="_blank">反馈问题</a>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px; opacity: 0.5; font-size: 0.875rem;">
+            &copy; <span id="copyright-year">2023-2025</span> 小树工作室（Little Tree Studio）. Open Source under AGPLv3 License.
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        // 自动更新版权年份
+        const currentYear = new Date().getFullYear();
+        const yearSpan = document.getElementById('copyright-year');
+        if (yearSpan) {
+            yearSpan.textContent = `2023-${currentYear}`;
+        }
+
+        // 简单的响应式菜单处理（如果需要）
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        // 实际项目中可以添加抽屉导航逻辑
+        if(window.innerWidth > 768) {
+            menuBtn.style.display = 'none';
+        }
+
+        function switchTab(tabValue) {
+            const tabs = document.getElementById('main-tabs');
+            tabs.value = tabValue;
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>

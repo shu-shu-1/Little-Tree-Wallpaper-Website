@@ -643,7 +643,6 @@
                 <mdui-tabs variant="secondary" value="stable" full-width id="versionTabs">
                     <mdui-tab value="stable" icon="shield">稳定版 5.1</mdui-tab>
                     <mdui-tab value="beta" icon="science">测试版 6.0</mdui-tab>
-                    <mdui-tab value="next" icon="watch_later">预览版 Next</mdui-tab>
 
                     <mdui-tab-panel slot="panel" value="stable">
                         <mdui-dialog fullscreen class="download-dialog-1" close-on-esc>
@@ -799,78 +798,6 @@
                         </div>
                     </mdui-tab-panel>
 
-                    <mdui-tab-panel slot="panel" value="next">
-                        <mdui-dialog fullscreen class="download-dialog-3" close-on-esc>
-                            <h1 class="mdui-typo-title">下载预览版 Next</h1>
-                            <p class="mdui-typo-body">请选择适合您操作系统的平台进行下载：</p>
-                            <div class="download-grid">
-                                <!-- <mdui-card class="download-card">
-                                    <div class="mdui-card-content text-center">
-                                        <mdui-icon class="platform-icon" name="desktop_windows"></mdui-icon>
-                                        <h3 class="mdui-typo-headline-small">Windows</h3>
-                                        <p class="mdui-typo-body-small" style="opacity: .75; margin: 8px 0 16px;">
-                                            适用于 x86-64 Windows 10/11 的安装包
-                                        </p>
-                                        <mdui-button variant="filled" icon="file_download"
-                                            href="#"
-                                            class="version-download-btn">下载</mdui-button>
-                                        <mdui-button variant="text" icon="router">镜像</mdui-button>
-                                    </div>
-                                </mdui-card> -->
-                                <p>暂无公开测试版本</p>
-                            </div>
-                            <mdui-button onclick="document.querySelector('.download-dialog-3').open = false"
-                                slot="action" icon="close">关闭</mdui-button>
-                        </mdui-dialog>
-                        <mdui-dialog class="test-warning-2" close-on-esc close-on-overlay-click>
-                            <div class="mdui-prose">
-                                <h3>测试暂未开放</h3>
-                            </div>
-                        </mdui-dialog>
-                        <div class="version-panel">
-                            <div class="version-panel-left">
-                                <h3 class="mdui-typo-headline-medium">Next 预览版</h3>
-                                <p class="mdui-typo-body-large version-desc">实验性特性提前预览，适合尝鲜用户。</p>
-                                <div class="version-feature-list">
-                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 更流畅和美观的界面</div>
-                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> AI 智能标签</div>
-                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 插件系统</div>
-                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 搜索壁纸</div>
-                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 嗅探壁纸</div>
-                                    <div class="vf-item"><mdui-icon name="check_circle"></mdui-icon> 更多壁纸源</div>
-                                </div>
-                                <div class="version-actions">
-                                    <mdui-button variant="filled" icon="file_download"
-                                        onclick="document.querySelector('.download-dialog-3').open = true">体验预览版</mdui-button>
-                                    <mdui-button variant="text" icon="code"
-                                        href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet">源码</mdui-button>
-                                    <mdui-button variant="text" icon="psychology" onclick="document.querySelector('.test-warning-2').open = true">实验说明</mdui-button>
-                                </div>
-                            </div>
-                            <div class="version-panel-right">
-                                <mdui-card class="stats-card">
-                                    <div class="stats-grid">
-                                        <div class="s-item">
-                                            <div class="s-val">4.8</div>
-                                            <div class="s-label">评分</div>
-                                        </div>
-                                        <div class="s-item">
-                                            <div class="s-val">300+</div>
-                                            <div class="s-label">下载</div>
-                                        </div>
-                                        <div class="s-item">
-                                            <div class="s-val">70%</div>
-                                            <div class="s-label">稳定性</div>
-                                        </div>
-                                        <div class="s-item">
-                                            <div class="s-val">积极</div>
-                                            <div class="s-label">支持</div>
-                                        </div>
-                                    </div>
-                                </mdui-card>
-                            </div>
-                        </div>
-                    </mdui-tab-panel>
                 </mdui-tabs>
             </div>
         </section>
