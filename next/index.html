@@ -351,8 +351,8 @@
                     <div class="hero-container">
                         <div class="hero-text">
                             <div style="display: inline-flex; align-items: center; gap: 8px; background: rgb(var(--mdui-color-secondary-container)); color: rgb(var(--mdui-color-on-secondary-container)); padding: 6px 16px; border-radius: 100px; margin-bottom: 24px; font-size: 0.875rem; font-weight: 500;">
-                                <mdui-icon name="science" style="font-size: 18px;"></mdui-icon>
-                                预览版现已发布
+                                <mdui-icon name="new_releases" style="font-size: 18px;"></mdui-icon>
+                                正式版现已发布
                             </div>
                             <h1 class="hero-title">重塑你的<br>桌面壁纸体验</h1>
                             <p class="hero-subtitle">
@@ -361,7 +361,7 @@
                             </p>
                             <div class="action-buttons" style="display: flex; gap: 16px; flex-wrap: wrap;">
                                 <mdui-button onclick="switchTab('download')" variant="filled" size="large" icon="download">
-                                    下载预览版
+                                    立即下载
                                 </mdui-button>
                                 <mdui-button href="#features" variant="outlined" size="large" icon="expand_more">
                                     了解更多
@@ -435,7 +435,7 @@
                     <div class="container">
                         <h2 style="font-size: 2rem; margin-bottom: 16px;">准备好体验未来了吗？</h2>
                         <p style="font-size: 1.1rem; opacity: 0.8; margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                            小树壁纸 Next 目前处于预览阶段，欢迎开发者和尝鲜用户下载体验并提供反馈。
+                            小树壁纸 Next 现已正式发布，欢迎下载体验。
                         </p>
                         <mdui-button onclick="switchTab('download')" variant="filled" size="large" icon="rocket_launch">
                             立即下载
@@ -446,62 +446,55 @@
 
             <mdui-tab-panel slot="panel" value="download">
                 <div class="download-header">
-                    <h1 class="header-title">获取预览版</h1>
-                    <p class="header-subtitle">抢先体验下一代壁纸管理工具的最新特性。请注意，预览版可能包含未修复的错误。</p>
+                    <h1 class="header-title">下载小树壁纸 Next</h1>
+                    <p class="header-subtitle">体验下一代壁纸管理工具的最新特性。</p>
                 </div>
 
-                <div class="download-container" style="margin: -40px auto 60px; max-width: 900px; padding: 0 24px; position: relative; z-index: 1;">
-                    <mdui-card class="download-card" variant="elevated" style="padding: 40px; border-radius: 24px; display: flex; flex-direction: column; align-items: center; text-align: center;">
-                        <mdui-icon name="science" class="platform-icon" style="font-size: 64px; color: rgb(var(--mdui-color-primary)); margin-bottom: 24px;"></mdui-icon>
-                        
-                        <div class="version-info" style="background-color: rgb(var(--mdui-color-secondary-container)); color: rgb(var(--mdui-color-on-secondary-container)); padding: 8px 16px; border-radius: 100px; font-weight: 500; margin-bottom: 24px; display: inline-flex; align-items: center; gap: 8px;">
+                <div class="download-container" style="margin: -40px auto 60px; max-width: 1200px; padding: 0 24px; position: relative; z-index: 1;">
+                    <div style="text-align: center; margin-bottom: 24px;">
+                        <div class="version-info" style="background-color: rgb(var(--mdui-color-secondary-container)); color: rgb(var(--mdui-color-on-secondary-container)); padding: 8px 16px; border-radius: 100px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px;">
                             <mdui-icon name="info" style="font-size: 18px;"></mdui-icon>
-                            当前版本: v0.1.0 Preview
+                            当前版本: v1.0.0
                         </div>
+                    </div>
 
-                        <h2 style="margin: 0 0 16px 0;">Windows 预览版</h2>
-                        <p style="opacity: 0.7; max-width: 500px; margin-bottom: 0;">
-                            适用于 Windows 10 (1903+) 和 Windows 11。
-                            <br>无需安装，解压即用。
+                    <div style="text-align: center; margin-bottom: 32px;">
+                         <p style="font-size: 1.1rem; font-weight: bold; color: rgb(var(--mdui-color-on-surface));">
+                            下载即代表同意 <a href="https://docs.zsxiaoshu.cn/terms/wallpaper/user_agreement/" target="_blank" style="color: rgb(var(--mdui-color-primary)); text-decoration: underline;">用户协议</a>
                         </p>
+                    </div>
 
-                        <div class="warning-box" style="background-color: rgb(var(--mdui-color-error-container)); color: rgb(var(--mdui-color-on-error-container)); padding: 16px; border-radius: 12px; margin: 24px 0; text-align: left; width: 100%; max-width: 600px; display: flex; gap: 16px; align-items: flex-start;">
-                            <mdui-icon name="warning" style="color: inherit;"></mdui-icon>
-                            <div>
-                                <div style="font-weight: bold; margin-bottom: 4px;">实验性版本</div>
-                                <div style="font-size: 0.9rem; opacity: 0.9;">
-                                    此版本主要用于功能展示和测试，不建议在生产环境中使用。可能会遇到崩溃或数据丢失的情况。
-                                </div>
-                            </div>
-                        </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 32px;">
+                        <!-- Windows -->
+                        <mdui-card class="download-card" variant="elevated" style="padding: 32px; border-radius: 24px; text-align: center;">
+                            <mdui-icon name="desktop_windows" style="font-size: 48px; color: rgb(var(--mdui-color-primary)); margin-bottom: 16px;"></mdui-icon>
+                            <h3 style="margin: 0 0 8px 0;">Windows</h3>
+                            <p style="opacity: 0.7; margin-bottom: 24px;">Windows 10/11 (x64)</p>
+                            <mdui-button href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet/releases/download/v1.0.0/Little-Tree-Wallpaper-Next-Windows-1.0.0.exe" target="_blank" variant="filled" icon="file_download" full-width>下载</mdui-button>
+                        </mdui-card>
 
-                        <div class="download-options" style="display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; justify-content: center;">
-                            <mdui-button href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet/releases/" target="_blank" variant="filled" size="large" icon="file_download">
-                                前往 GitHub 下载
-                            </mdui-button>
-                            <mdui-button href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet" target="_blank" variant="outlined" size="large" icon="code">
-                                查看源代码
-                            </mdui-button>
-                        </div>
-                        
-                        <div style="margin-top: 32px; padding-top: 32px; border-top: 1px solid rgba(var(--mdui-color-outline), 0.2); width: 100%;">
-                            <h3 style="font-size: 1.1rem; margin-bottom: 16px;">系统要求</h3>
-                            <div style="display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; text-align: left;">
-                                <div>
-                                    <div style="font-weight: bold; font-size: 0.9rem; opacity: 0.7;">操作系统</div>
-                                    <div>Windows 10/11 64-bit</div>
-                                </div>
-                                <div>
-                                    <div style="font-weight: bold; font-size: 0.9rem; opacity: 0.7;">内存</div>
-                                    <div>2GB RAM 或更多</div>
-                                </div>
-                                <div>
-                                    <div style="font-weight: bold; font-size: 0.9rem; opacity: 0.7;">存储空间</div>
-                                    <div>300MB 可用空间</div>
-                                </div>
-                            </div>
-                        </div>
-                    </mdui-card>
+                        <!-- Linux -->
+                        <mdui-card class="download-card" variant="elevated" style="padding: 32px; border-radius: 24px; text-align: center;">
+                            <mdui-icon name="terminal" style="font-size: 48px; color: rgb(var(--mdui-color-primary)); margin-bottom: 16px;"></mdui-icon>
+                            <h3 style="margin: 0 0 8px 0;">Linux</h3>
+                            <p style="opacity: 0.7; margin-bottom: 24px;">AppImage / Deb</p>
+                            <mdui-button href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet/releases/download/v1.0.0/Little-Tree-Wallpaper-Next-Linux-1.0.0.AppImage" target="_blank" variant="filled" icon="file_download" full-width>下载</mdui-button>
+                        </mdui-card>
+
+                        <!-- macOS -->
+                        <mdui-card class="download-card" variant="elevated" style="padding: 32px; border-radius: 24px; text-align: center;">
+                            <mdui-icon name="laptop_mac" style="font-size: 48px; color: rgb(var(--mdui-color-primary)); margin-bottom: 16px;"></mdui-icon>
+                            <h3 style="margin: 0 0 8px 0;">macOS</h3>
+                            <p style="opacity: 0.7; margin-bottom: 24px;">macOS 11+ (Universal)</p>
+                            <mdui-button href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet/releases/download/v1.0.0/Little-Tree-Wallpaper-Next-macOS-1.0.0.dmg" target="_blank" variant="filled" icon="file_download" full-width>下载</mdui-button>
+                        </mdui-card>
+                    </div>
+
+                    <div style="text-align: center;">
+                        <mdui-button href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet/releases" target="_blank" variant="text" icon="open_in_new">
+                            前往 GitHub 下载其他版本
+                        </mdui-button>
+                    </div>
                 </div>
             </mdui-tab-panel>
         </mdui-tabs>
@@ -512,7 +505,7 @@
         <div class="footer-content">
             <div style="display: flex; align-items: center; gap: 12px;">
                 <span style="font-weight: bold; font-size: 1.2rem;">小树壁纸 Next</span>
-                <span style="font-size: 0.8rem; opacity: 0.6;">v0.1.0 Preview</span>
+                <span style="font-size: 0.8rem; opacity: 0.6;">v1.0.0</span>
             </div>
             <div class="footer-links">
                 <a href="javascript:void(0)" onclick="switchTab('home')" class="footer-link">首页</a>
