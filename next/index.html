@@ -464,13 +464,22 @@
                         </p>
                     </div>
 
+                    <!-- 地区选择 -->
+                    <div style="text-align: center; margin-bottom: 24px;">
+                        <span style="margin-right: 12px; font-weight: 500;">下载节点:</span>
+                        <mdui-segmented-button-group selects="single" value="china" id="region-selector">
+                            <mdui-segmented-button value="china">中国大陆</mdui-segmented-button>
+                            <mdui-segmented-button value="global">全球</mdui-segmented-button>
+                        </mdui-segmented-button-group>
+                    </div>
+
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 32px;">
                         <!-- Windows -->
                         <mdui-card class="download-card" variant="elevated" style="padding: 32px; border-radius: 24px; text-align: center;">
                             <mdui-icon name="desktop_windows" style="font-size: 48px; color: rgb(var(--mdui-color-primary)); margin-bottom: 16px;"></mdui-icon>
                             <h3 style="margin: 0 0 8px 0;">Windows</h3>
                             <p style="opacity: 0.7; margin-bottom: 24px;">Windows 10/11 (x64)</p>
-                            <mdui-button href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet/releases/download/v1.0.0/Little-Tree-Wallpaper-Next-Windows-1.0.0.exe" target="_blank" variant="filled" icon="file_download" full-width>下载</mdui-button>
+                            <mdui-button id="windows-download-btn" href="https://gh-proxy.com/https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet/releases/download/v1.0.0/LittleTreLittleTreeWallpaper-next-1.0-windows-x64.exe" target="_blank" variant="filled" icon="file_download" full-width>下载</mdui-button>
                         </mdui-card>
 
                         <!-- Linux -->
@@ -478,7 +487,7 @@
                             <mdui-icon name="terminal" style="font-size: 48px; color: rgb(var(--mdui-color-primary)); margin-bottom: 16px;"></mdui-icon>
                             <h3 style="margin: 0 0 8px 0;">Linux</h3>
                             <p style="opacity: 0.7; margin-bottom: 24px;">AppImage / Deb</p>
-                            <mdui-button href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet/releases/download/v1.0.0/Little-Tree-Wallpaper-Next-Linux-1.0.0.AppImage" target="_blank" variant="filled" icon="file_download" full-width>下载</mdui-button>
+                            <mdui-button onclick="showBuildingAlert()" variant="filled" icon="file_download" full-width>下载</mdui-button>
                         </mdui-card>
 
                         <!-- macOS -->
@@ -486,7 +495,7 @@
                             <mdui-icon name="laptop_mac" style="font-size: 48px; color: rgb(var(--mdui-color-primary)); margin-bottom: 16px;"></mdui-icon>
                             <h3 style="margin: 0 0 8px 0;">macOS</h3>
                             <p style="opacity: 0.7; margin-bottom: 24px;">macOS 11+ (Universal)</p>
-                            <mdui-button href="https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet/releases/download/v1.0.0/Little-Tree-Wallpaper-Next-macOS-1.0.0.dmg" target="_blank" variant="filled" icon="file_download" full-width>下载</mdui-button>
+                            <mdui-button onclick="showBuildingAlert()" variant="filled" icon="file_download" full-width>下载</mdui-button>
                         </mdui-card>
                     </div>
 
@@ -538,6 +547,34 @@
             const tabs = document.getElementById('main-tabs');
             tabs.value = tabValue;
             window.scrollTo(0, 0);
+        }
+
+        // 下载链接配置
+        const downloadUrls = {
+            china: "https://gh-proxy.com/https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet/releases/download/v1.0.0/LittleTreLittleTreeWallpaper-next-1.0-windows-x64.exe",
+            global: "https://github.com/shu-shu-1/Little-Tree-Wallpaper-Next-Flet/releases/download/v1.0.0/LittleTreLittleTreeWallpaper-next-1.0-windows-x64.exe"
+        };
+
+        // 地区切换逻辑
+        const regionSelector = document.getElementById('region-selector');
+        const windowsBtn = document.getElementById('windows-download-btn');
+
+        if (regionSelector && windowsBtn) {
+            regionSelector.addEventListener('change', (e) => {
+                const region = regionSelector.value;
+                if (downloadUrls[region]) {
+                    windowsBtn.href = downloadUrls[region];
+                }
+            });
+        }
+
+        // 构建中提示
+        function showBuildingAlert() {
+            mdui.snackbar({
+                message: "构建中，7天内解决",
+                placement: "top",
+                closeable: true,
+            });
         }
     </script>
 </body>
